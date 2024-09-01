@@ -6,14 +6,16 @@ Small and easy to use utilities for
 They simplify usage [in async code](#awaitsignalawaitmatch),
 [with Sets and Maps](#setsignalmapsignal) and [as timers](#timersignal)
 
-More usage examples can be found
-[here](https://github.com/deno-plc/signal-utils/tree/main/examples)
-
 ## Installation
 
 [Use JSR: ![JSR](https://jsr.io/badges/@deno-plc/signal-utils)](https://jsr.io/@deno-plc/signal-utils)
 
-## `awaitSignal`/`awaitMatch`
+## Usage
+
+More usage examples can be found
+[here](https://github.com/deno-plc/signal-utils/tree/main/examples)
+
+### `awaitSignal`/`awaitMatch`
 
 Listen to Signal changes with async/await
 
@@ -41,12 +43,12 @@ which the promise is resolved even if the values don't match. The Promise
 resolves with `true` if the values matched and `false` if the timeout was
 reached.
 
-## `SetSignal`/`MapSignal`
+### `SetSignal`/`MapSignal`
 
 Both can be used like ordinary Sets/Maps (they even implement the interfaces
-provided by the TS DOM lib). Only
-[Set composition](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#set_composition])
-is unsupported
+provided by the TS DOM lib). Only advanced
+[composition functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#set_composition)
+are not supported (they would get extremely complex)
 
 In contrast to ordinary Maps/Sets they track all member changes. Unless
 otherwise noted all methods work like `.value` on a signal. Getter functions
@@ -74,7 +76,7 @@ list.clear(); // prints: The list is empty
 
 If you really need to access the raw Set/Map use the `unsafe_*` methods.
 
-## `TimerSignal`
+### `TimerSignal`
 
 A `TimerSignal` is essentially a `boolean` signal that defaults to `false`. It
 can be activated, turning it into `true`. After all activations are released

@@ -1,6 +1,6 @@
 {
     "name": "@deno-plc/signal-utils",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "exports": {
         "./async": "./src/async.ts",
         "./map": "./src/map.ts",

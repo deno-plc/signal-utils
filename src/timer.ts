@@ -16,12 +16,27 @@
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * @module
+ *
+ * A `TimerSignal` is essentially a `boolean` signal that defaults to
+ * `false`. It can be activated, turning it into `true`. After all
+ * activations are released (either the timeout elapsed or it was
+ * canceled) it resets to `false`.
  */
 
 import { type ReadonlySignal, signal } from "@preact/signals-core";
 import type { FastBrand } from "@coderspirit/nominal";
 
+/**
+ * This is a handle for a {@link TimerSignal} Activation
+ *
+ * Returned by {@link TimerSignal.activate}
+ *
+ * Can be passed to {@link TimerSignal.cancel}
+ */
 export type TimerActivation = FastBrand<symbol, "TimerActivation">;
+
 type Timeout = FastBrand<number | undefined, "Timeout">;
 
 /**
@@ -39,7 +54,7 @@ export class TimerSignal implements ReadonlySignal<boolean> {
 
     /**
      * active the timer for the specified time or forever (`Infinity`)
-     * @returns The return value can be passed to `cancel` to stop the activation
+     * @returns The return value can be passed to {@link cancel} to stop the activation
      */
     public activate(time = Infinity): TimerActivation {
         const activation = Symbol() as TimerActivation;

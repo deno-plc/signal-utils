@@ -16,6 +16,33 @@
  * GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * @module
+ *
+ * Listen to Signal changes with async/await
+ *
+ * ```typescript
+ * import { signal } from "@preact/signals-core";
+ * import { awaitSignal } from "@deno-plc/signal-utils/async";
+ *
+ * const connected = signal(false);
+ *
+ * foo.addEventListener("connected", () => {
+ *     connected.value = true;
+ * });
+ *
+ * console.log("connecting ...");
+ * await awaitSignal(connected, true);
+ * console.log("connected!");
+ * ```
+ *
+ * If you need a more complex comparison you can use `awaitMatch`, which takes a
+ * `(value: T) => boolean` function instead of a fixed value as the second argument.
+ *
+ * Both functions can take a third argument specifying a timeout (in ms) after
+ * which the promise is resolved even if the values don't match.
+ * The Promise resolves with `true` if the values matched and `false` if the timeout
+ * was reached.
  */
 
 import { effect, type Signal } from "@preact/signals-core";
